@@ -29,9 +29,9 @@ CREATE TABLE IF NOT EXISTS `project`.`brand` (
   PRIMARY KEY (`idBrand`))
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `idBrand_UNIQUE` ON `project`.`Brand` (`idBrand` ASC) VISIBLE;
+CREATE UNIQUE INDEX `idBrand_UNIQUE` ON `project`.`brand` (`idBrand` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `Brandcol_UNIQUE` ON `project`.`Brand` (`brandName` ASC) VISIBLE;
+CREATE UNIQUE INDEX `brandcol_UNIQUE` ON `project`.`brand` (`brandName` ASC) VISIBLE;
 
 /*
 -- Query: SELECT * FROM project.brand
@@ -60,11 +60,11 @@ CREATE TABLE IF NOT EXISTS `project`.`color` (
   PRIMARY KEY (`idColor`))
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `idColor_UNIQUE` ON `project`.`Color` (`idColor` ASC) VISIBLE;
+CREATE UNIQUE INDEX `idColor_UNIQUE` ON `project`.`color` (`idColor` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `nameColor_UNIQUE` ON `project`.`Color` (`colorName` ASC) VISIBLE;
+CREATE UNIQUE INDEX `nameColor_UNIQUE` ON `project`.`color` (`colorName` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `colorCode_UNIQUE` ON `project`.`Color` (`colorCode` ASC) VISIBLE;
+CREATE UNIQUE INDEX `colorCode_UNIQUE` ON `project`.`color` (`colorCode` ASC) VISIBLE;
 
 /*
 -- Query: SELECT * FROM project.color
@@ -72,6 +72,7 @@ LIMIT 0, 1000
 
 -- Date: 2021-09-02 16:12
 */
+USE `project`;
 INSERT INTO `color` (`idColor`,`colorName`,`colorCode`) VALUES (1,'Black','#000000');
 INSERT INTO `color` (`idColor`,`colorName`,`colorCode`) VALUES (2,'White','#FFFFFF');
 INSERT INTO `color` (`idColor`,`colorName`,`colorCode`) VALUES (3,'Navy Blue','#141a2a');
@@ -92,12 +93,14 @@ INSERT INTO `color` (`idColor`,`colorName`,`colorCode`) VALUES (17,'Mustard','#E
 INSERT INTO `color` (`idColor`,`colorName`,`colorCode`) VALUES (18,'Blue','#2B4C9B');
 INSERT INTO `color` (`idColor`,`colorName`,`colorCode`) VALUES (19,'Light Yellow','#FDDA98');
 
+COMMIT;
+
 -- -----------------------------------------------------
 -- Table `project`.`Product`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `project`.`Product` ;
 
-CREATE TABLE IF NOT EXISTS `project`.`Product` (
+CREATE TABLE IF NOT EXISTS `project`.`product` (
   `idPro` INT NOT NULL AUTO_INCREMENT,
   `proName` VARCHAR(100) NOT NULL,
   `proDescript` LONGTEXT NOT NULL,
@@ -107,18 +110,18 @@ CREATE TABLE IF NOT EXISTS `project`.`Product` (
   `proPathImg` MEDIUMTEXT NOT NULL,
   `idBrand` INT NOT NULL,
   PRIMARY KEY (`idPro`, `idBrand`),
-  CONSTRAINT `fk_Product_Brand`
+  CONSTRAINT `fk_product_Brand`
     FOREIGN KEY (`idBrand`)
     REFERENCES `project`.`Brand` (`idBrand`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `idProduct_UNIQUE` ON `project`.`Product` (`idPro` ASC) VISIBLE;
+CREATE UNIQUE INDEX `idProduct_UNIQUE` ON `project`.`product` (`idPro` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `proName_UNIQUE` ON `project`.`Product` (`proName` ASC) VISIBLE;
+CREATE UNIQUE INDEX `proName_UNIQUE` ON `project`.`product` (`proName` ASC) VISIBLE;
 
-CREATE INDEX `fk_Product_Brand_idx` ON `project`.`Product` (`idBrand` ASC) VISIBLE;
+CREATE INDEX `fk_Product_Brand_idx` ON `project`.`product` (`idBrand` ASC) VISIBLE;
 
 /*
 -- Query: SELECT * FROM project.product
@@ -126,6 +129,7 @@ LIMIT 0, 1000
 
 -- Date: 2021-09-02 16:12
 */
+USE `project`;
 INSERT INTO `product` (`idPro`,`proName`,`proDescript`,`proPrice`,`proAmount`,`proMFD`,`proPathImg`,`idBrand`) VALUES (1,'MONOGRAM OMBRE SILK PAJAMA TOP','The House’s iconic Monogram motif is playfully scaled-up and printed in a summery ombre effect to give this short-sleeved pajama top a fresh lounge feel. Cut from comfortable, lightweight silk that further relaxes the boxy silhouette. White piping and a front patch pocket refine the easy-to-wear style.',73999.00,100,'2021-02-23','img01.png',1);
 INSERT INTO `product` (`idPro`,`proName`,`proDescript`,`proPrice`,`proAmount`,`proMFD`,`proPathImg`,`idBrand`) VALUES (2,'GALAXY PRINT MIXED-MATERIAL T-SHIRT','The playful graphic on this mixed-material T-shirt is inspired by comic books: vibrant LV Initials and Monogram Flowers collide with stars and planets on printed silk twill. The contrasting back is cut slightly longer, in cotton jersey. The silhouette is relaxed and roomy. The top square button on the shoulder is engraved with a House signature.',3039900.00,50,'2020-03-30','img03.png',1);
 INSERT INTO `product` (`idPro`,`proName`,`proDescript`,`proPrice`,`proAmount`,`proMFD`,`proPathImg`,`idBrand`) VALUES (3,'MIXED KNIT LIGHTWEIGHT SUMMER PULLOVER','Different textures and tones of natural fibers combine to create this summer pullover. The shoulders and left sleeve stand out in contrast cotton poplin, while a mix of knitted cotton panels complete the silhouette. The collection’s essential leather Monogram patch signs the chest.',80880.00,80,'2019-06-15','img05.png',1);
@@ -139,12 +143,13 @@ INSERT INTO `product` (`idPro`,`proName`,`proDescript`,`proPrice`,`proAmount`,`p
 INSERT INTO `product` (`idPro`,`proName`,`proDescript`,`proPrice`,`proAmount`,`proMFD`,`proPathImg`,`idBrand`) VALUES (11,'WOMEN Rayon Long Sleeve Blouse','Soft, silky rayon fabric and Wrinkle-resistant even after washing for easy care.',790.00,85,'2021-02-18','img27.png',4);
 INSERT INTO `product` (`idPro`,`proName`,`proDescript`,`proPrice`,`proAmount`,`proMFD`,`proPathImg`,`idBrand`) VALUES (12,'WOMEN color crew neck Short Sleeve T-Shirt','Made from soft and supple cotton viscose. A crew neck with a perfect opening at the neck.',190.00,68,'2019-10-03','img30.png',4);
 
+COMMIT;
 -- -----------------------------------------------------
 -- Table `project`.`ProWithColors`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `project`.`ProWithColors` ;
+DROP TABLE IF EXISTS `project`.`proWithColors` ;
 
-CREATE TABLE IF NOT EXISTS `project`.`ProWithColors` (
+CREATE TABLE IF NOT EXISTS `project`.`proWithColors` (
   `idProWithCol` INT NOT NULL AUTO_INCREMENT,
   `idColor` INT NOT NULL,
   `idPro` INT NOT NULL,
@@ -161,11 +166,11 @@ CREATE TABLE IF NOT EXISTS `project`.`ProWithColors` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Color_has_Product_Product_idx` ON `project`.`ProWithColors` (`idPro` ASC) VISIBLE;
+CREATE INDEX `fk_Color_has_Product_Product_idx` ON `project`.`proWithColors` (`idPro` ASC) VISIBLE;
 
-CREATE INDEX `fk_Color_has_Product_Color_idx` ON `project`.`ProWithColors` (`idColor` ASC) VISIBLE;
+CREATE INDEX `fk_Color_has_Product_Color_idx` ON `project`.`proWithColors` (`idColor` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `idProWithCol_UNIQUE` ON `project`.`ProWithColors` (`idProWithCol` ASC) VISIBLE;
+CREATE UNIQUE INDEX `idProWithCol_UNIQUE` ON `project`.`proWithColors` (`idProWithCol` ASC) VISIBLE;
 
 /*
 -- Query: SELECT * FROM project.prowithcolors
@@ -173,50 +178,54 @@ LIMIT 0, 1000
 
 -- Date: 2021-09-02 16:12
 */
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (1,5,1);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (2,6,1);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (3,1,2);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (4,2,2);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (5,1,3);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (6,13,3);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (7,3,4);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (8,4,4);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (9,2,5);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (10,4,5);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (11,2,6);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (12,7,6);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (13,8,6);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (14,9,6);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (15,10,6);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (16,11,7);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (17,12,7);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (18,14,8);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (19,15,8);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (20,16,8);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (21,4,9);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (22,1,9);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (23,17,10);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (24,18,10);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (25,2,10);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (26,1,10);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (27,3,11);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (28,2,11);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (29,1,11);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (30,19,12);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (31,2,12);
-INSERT INTO `prowithcolors` (`idProWithCol`,`idColor`,`idPro`) VALUES (32,3,12);
+USE `project`;
+
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (1,5,1);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (2,6,1);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (3,1,2);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (4,2,2);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (5,1,3);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (6,13,3);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (7,3,4);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (8,4,4);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (9,2,5);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (10,4,5);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (11,2,6);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (12,7,6);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (13,8,6);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (14,9,6);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (15,10,6);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (16,11,7);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (17,12,7);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (18,14,8);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (19,15,8);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (20,16,8);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (21,4,9);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (22,1,9);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (23,17,10);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (24,18,10);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (25,2,10);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (26,1,10);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (27,3,11);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (28,2,11);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (29,1,11);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (30,19,12);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (31,2,12);
+INSERT INTO `proWithColors` (`idProWithCol`,`idColor`,`idPro`) VALUES (32,3,12);
+
+COMMIT;
 
 -- -----------------------------------------------------
 -- Table `project`.`Cart`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `project`.`Cart` ;
+DROP TABLE IF EXISTS `project`.`cart` ;
 
-CREATE TABLE IF NOT EXISTS `project`.`Cart` (
+CREATE TABLE IF NOT EXISTS `project`.`cart` (
   `idCart` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idCart`))
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `idCart_UNIQUE` ON `project`.`Cart` (`idCart` ASC) VISIBLE;
+CREATE UNIQUE INDEX `idCart_UNIQUE` ON `project`.`cart` (`idCart` ASC) VISIBLE;
 
 /*
 -- Query: SELECT * FROM project.cart
@@ -224,17 +233,21 @@ LIMIT 0, 1000
 
 -- Date: 2021-09-02 16:11
 */
+USE `project`;
+
 INSERT INTO `cart` (`idCart`) VALUES (1);
 INSERT INTO `cart` (`idCart`) VALUES (2);
 INSERT INTO `cart` (`idCart`) VALUES (3);
 INSERT INTO `cart` (`idCart`) VALUES (4);
 
+COMMIT;
+
 -- -----------------------------------------------------
 -- Table `project`.`Account`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `project`.`Account` ;
+DROP TABLE IF EXISTS `project`.`account` ;
 
-CREATE TABLE IF NOT EXISTS `project`.`Account` (
+CREATE TABLE IF NOT EXISTS `project`.`account` (
   `idAccount` INT NOT NULL AUTO_INCREMENT,
   `accUsername` VARCHAR(45) NOT NULL,
   `accPass` VARCHAR(45) NOT NULL,
@@ -245,18 +258,18 @@ CREATE TABLE IF NOT EXISTS `project`.`Account` (
   `accAddress` VARCHAR(300) NOT NULL,
   `idCart` INT NOT NULL,
   PRIMARY KEY (`idAccount`, `idCart`),
-  CONSTRAINT `fk_Account_Cart1`
+  CONSTRAINT `fk_account_Cart1`
     FOREIGN KEY (`idCart`)
     REFERENCES `project`.`Cart` (`idCart`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `accUsername_UNIQUE` ON `project`.`Account` (`accUsername` ASC) VISIBLE;
+CREATE UNIQUE INDEX `accUsername_UNIQUE` ON `project`.`account` (`accUsername` ASC) VISIBLE;
 
-CREATE INDEX `fk_Account_Cart1_idx` ON `project`.`Account` (`idCart` ASC) VISIBLE;
+CREATE INDEX `fk_Account_Cart1_idx` ON `project`.`account` (`idCart` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `idAccount_UNIQUE` ON `project`.`Account` (`idAccount` ASC) VISIBLE;
+CREATE UNIQUE INDEX `idAccount_UNIQUE` ON `project`.`account` (`idAccount` ASC) VISIBLE;
 
 /*
 -- Query: SELECT * FROM project.account
@@ -264,17 +277,18 @@ LIMIT 0, 1000
 
 -- Date: 2021-09-02 16:10
 */
+USE `project`;
 INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accRole`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`) VALUES (1,'yamjaii','jaiyen123','member','yamcha','fainting','0833333333','88 north kaio\'s planet 86868',1);
 INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accRole`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`) VALUES (2,'sunshinewink','moonsun','member','arthit','songsaeng','0822222222','99 land-ofthesun99/9 sawang 12345 ',2);
 INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accRole`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`) VALUES (3,'somdui','12345','admin','somdui','puipui','0811111111','112 inyourheart22/2 forever 12222',3);
 INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accRole`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`) VALUES (4,'kiritokun','asuna','admin','kirito','kirigaya','0812345689','36 swordland10 underworld 11111',4);
-
+COMMIT;
 -- -----------------------------------------------------
 -- Table `project`.`CartDetails`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `project`.`CartDetails` ;
+DROP TABLE IF EXISTS `project`.`cartDetails` ;
 
-CREATE TABLE IF NOT EXISTS `project`.`CartDetails` (
+CREATE TABLE IF NOT EXISTS `project`.`cartDetails` (
   `idCartDetail` INT NOT NULL AUTO_INCREMENT,
   `idPro` INT NOT NULL,
   `idCart` INT NOT NULL,
@@ -291,50 +305,50 @@ CREATE TABLE IF NOT EXISTS `project`.`CartDetails` (
     REFERENCES `project`.`Cart` (`idCart`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_CartDetails_Color1`
+  CONSTRAINT `fk_cartDetails_Color1`
     FOREIGN KEY (`idColor`)
     REFERENCES `project`.`Color` (`idColor`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_CartDetail_Product_idx` ON `project`.`CartDetails` (`idPro` ASC) VISIBLE;
+CREATE INDEX `fk_CartDetail_Product_idx` ON `project`.`cartDetails` (`idPro` ASC) VISIBLE;
 
-CREATE INDEX `fk_CartDetail_Cart_idx` ON `project`.`CartDetails` (`idCart` ASC) VISIBLE;
+CREATE INDEX `fk_CartDetail_Cart_idx` ON `project`.`cartDetails` (`idCart` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `idCartDetail_UNIQUE` ON `project`.`CartDetails` (`idCartDetail` ASC) VISIBLE;
+CREATE UNIQUE INDEX `idCartDetail_UNIQUE` ON `project`.`cartDetails` (`idCartDetail` ASC) VISIBLE;
 
-CREATE INDEX `fk_CartDetails_Color1_idx` ON `project`.`CartDetails` (`idColor` ASC) VISIBLE;
+CREATE INDEX `fk_cartDetails_Color1_idx` ON `project`.`cartDetails` (`idColor` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `project`.`Receipt`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `project`.`Receipt` ;
+DROP TABLE IF EXISTS `project`.`receipt` ;
 
-CREATE TABLE IF NOT EXISTS `project`.`Receipt` (
+CREATE TABLE IF NOT EXISTS `project`.`receipt` (
   `idReceipt` INT NOT NULL AUTO_INCREMENT,
   `idAccount` INT NOT NULL,
   `datePurchase` DATETIME NULL,
   PRIMARY KEY (`idReceipt`, `idAccount`),
-  CONSTRAINT `fk_Receipt_Account1`
+  CONSTRAINT `fk_receipt_Account1`
     FOREIGN KEY (`idAccount`)
     REFERENCES `project`.`Account` (`idAccount`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Receipt_Account1_idx` ON `project`.`Receipt` (`idAccount` ASC) VISIBLE;
+CREATE INDEX `fk_receipt_Account1_idx` ON `project`.`receipt` (`idAccount` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `idReceipt_UNIQUE` ON `project`.`Receipt` (`idReceipt` ASC) VISIBLE;
+CREATE UNIQUE INDEX `idReceipt_UNIQUE` ON `project`.`receipt` (`idReceipt` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `project`.`ReceiptDetails`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `project`.`ReceiptDetails` ;
+DROP TABLE IF EXISTS `project`.`receiptDetails` ;
 
-CREATE TABLE IF NOT EXISTS `project`.`ReceiptDetails` (
+CREATE TABLE IF NOT EXISTS `project`.`receiptDetails` (
   `idReceiptDetails` INT NOT NULL AUTO_INCREMENT,
   `idReceipt` INT NOT NULL,
   `brandName` VARCHAR(45) NOT NULL,
@@ -343,23 +357,23 @@ CREATE TABLE IF NOT EXISTS `project`.`ReceiptDetails` (
   `proPerPiece` INT NOT NULL COMMENT 'เสื้อ A มีจำนวน 10 ชิ้น\nเสื้อ B มีจำนวน 10 ชิ้น\nproPerPiece(A) = 10\nproPerPiece(B) = 10',
   `idColor` INT NOT NULL,
   PRIMARY KEY (`idReceiptDetails`, `idReceipt`, `idColor`),
-  CONSTRAINT `fk_ReceiptDetails_Receipt1`
+  CONSTRAINT `fk_receiptDetails_Receipt1`
     FOREIGN KEY (`idReceipt`)
     REFERENCES `project`.`Receipt` (`idReceipt`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ReceiptDetails_Color1`
+  CONSTRAINT `fk_receiptDetails_Color1`
     FOREIGN KEY (`idColor`)
     REFERENCES `project`.`Color` (`idColor`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_ReceiptDetails_Receipt1_idx` ON `project`.`ReceiptDetails` (`idReceipt` ASC) VISIBLE;
+CREATE INDEX `fk_receiptDetails_Receipt1_idx` ON `project`.`receiptDetails` (`idReceipt` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `idReceiptDetails_UNIQUE` ON `project`.`ReceiptDetails` (`idReceiptDetails` ASC) VISIBLE;
+CREATE UNIQUE INDEX `idReceiptDetails_UNIQUE` ON `project`.`receiptDetails` (`idReceiptDetails` ASC) VISIBLE;
 
-CREATE INDEX `fk_ReceiptDetails_Color1_idx` ON `project`.`ReceiptDetails` (`idColor` ASC) VISIBLE;
+CREATE INDEX `fk_receiptDetails_Color1_idx` ON `project`.`receiptDetails` (`idColor` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
