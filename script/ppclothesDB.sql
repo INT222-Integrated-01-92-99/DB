@@ -41,10 +41,10 @@ LIMIT 0, 1000
 */
 
 USE `project`;
-INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (3,'H&M');
-INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (1,'LOUIS VUITTON');
-INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (2,'SHEIN');
-INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (4,'UNIQLO');
+INSERT INTO `Brand` (`idBrand`,`brandName`) VALUES (3,'H&M');
+INSERT INTO `Brand` (`idBrand`,`brandName`) VALUES (1,'LOUIS VUITTON');
+INSERT INTO `Brand` (`idBrand`,`brandName`) VALUES (2,'SHEIN');
+INSERT INTO `Brand` (`idBrand`,`brandName`) VALUES (4,'UNIQLO');
 
 COMMIT;
 
