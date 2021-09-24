@@ -21,9 +21,9 @@ USE `project` ;
 -- -----------------------------------------------------
 -- Table `project`.`Brand`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `project`.`Brand` ;
+DROP TABLE IF EXISTS `project`.`brand` ;
 
-CREATE TABLE IF NOT EXISTS `project`.`Brand` (
+CREATE TABLE IF NOT EXISTS `project`.`brand` (
   `idBrand` INT NOT NULL AUTO_INCREMENT,
   `brandName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idBrand`))
@@ -41,19 +41,19 @@ LIMIT 0, 1000
 */
 
 USE `project`;
-INSERT INTO `Brand` (`idBrand`,`brandName`) VALUES (3,'H&M');
-INSERT INTO `Brand` (`idBrand`,`brandName`) VALUES (1,'LOUIS VUITTON');
-INSERT INTO `Brand` (`idBrand`,`brandName`) VALUES (2,'SHEIN');
-INSERT INTO `Brand` (`idBrand`,`brandName`) VALUES (4,'UNIQLO');
+INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (3,'H&M');
+INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (1,'LOUIS VUITTON');
+INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (2,'SHEIN');
+INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (4,'UNIQLO');
 
 COMMIT;
 
 -- -----------------------------------------------------
 -- Table `project`.`Color`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `project`.`Color` ;
+DROP TABLE IF EXISTS `project`.`color` ;
 
-CREATE TABLE IF NOT EXISTS `project`.`Color` (
+CREATE TABLE IF NOT EXISTS `project`.`color` (
   `idColor` INT NOT NULL AUTO_INCREMENT,
   `colorName` VARCHAR(45) NOT NULL,
   `colorCode` VARCHAR(10) NOT NULL,
