@@ -39,11 +39,14 @@ LIMIT 0, 1000
 
 -- Date: 2021-09-02 16:11
 */
-INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (3,'H&M');
-INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (1,'LOUIS VUITTON');
-INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (2,'SHEIN');
-INSERT INTO `brand` (`idBrand`,`brandName`) VALUES (4,'UNIQLO');
+START TRANSACTION;
+USE `project`;
+INSERT INTO `project`.`brand` (`idBrand`,`brandName`) VALUES (3,'H&M');
+INSERT INTO `project`.`brand` (`idBrand`,`brandName`) VALUES (1,'LOUIS VUITTON');
+INSERT INTO `project`.`brand` (`idBrand`,`brandName`) VALUES (2,'SHEIN');
+INSERT INTO `project`.`brand` (`idBrand`,`brandName`) VALUES (4,'UNIQLO');
 
+COMMIT;
 
 -- -----------------------------------------------------
 -- Table `project`.`Color`
