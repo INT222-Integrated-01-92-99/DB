@@ -98,7 +98,7 @@ COMMIT;
 -- -----------------------------------------------------
 -- Table `project`.`Product`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `project`.`Product` ;
+DROP TABLE IF EXISTS `project`.`product` ;
 
 CREATE TABLE IF NOT EXISTS `project`.`product` (
   `idPro` INT NOT NULL AUTO_INCREMENT,
@@ -110,9 +110,9 @@ CREATE TABLE IF NOT EXISTS `project`.`product` (
   `proPathImg` MEDIUMTEXT NOT NULL,
   `idBrand` INT NOT NULL,
   PRIMARY KEY (`idPro`, `idBrand`),
-  CONSTRAINT `fk_product_Brand`
+  CONSTRAINT `fk_product_brand`
     FOREIGN KEY (`idBrand`)
-    REFERENCES `project`.`Brand` (`idBrand`)
+    REFERENCES `project`.`brand` (`idBrand`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -121,7 +121,7 @@ CREATE UNIQUE INDEX `idProduct_UNIQUE` ON `project`.`product` (`idPro` ASC) VISI
 
 CREATE UNIQUE INDEX `proName_UNIQUE` ON `project`.`product` (`proName` ASC) VISIBLE;
 
-CREATE INDEX `fk_Product_Brand_idx` ON `project`.`product` (`idBrand` ASC) VISIBLE;
+CREATE INDEX `fk_product_brand_idx` ON `project`.`product` (`idBrand` ASC) VISIBLE;
 
 /*
 -- Query: SELECT * FROM project.product
@@ -154,21 +154,21 @@ CREATE TABLE IF NOT EXISTS `project`.`proWithColors` (
   `idColor` INT NOT NULL,
   `idPro` INT NOT NULL,
   PRIMARY KEY (`idProWithCol`, `idColor`, `idPro`),
-  CONSTRAINT `fk_Color_has_Product_Color`
+  CONSTRAINT `fk_color_has_product_color`
     FOREIGN KEY (`idColor`)
-    REFERENCES `project`.`Color` (`idColor`)
+    REFERENCES `project`.`color` (`idColor`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Color_has_Product_Product`
+  CONSTRAINT `fk_color_has_product_product`
     FOREIGN KEY (`idPro`)
-    REFERENCES `project`.`Product` (`idPro`)
+    REFERENCES `project`.`product` (`idPro`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Color_has_Product_Product_idx` ON `project`.`proWithColors` (`idPro` ASC) VISIBLE;
+CREATE INDEX `fk_color_has_product_product_idx` ON `project`.`proWithColors` (`idPro` ASC) VISIBLE;
 
-CREATE INDEX `fk_Color_has_Product_Color_idx` ON `project`.`proWithColors` (`idColor` ASC) VISIBLE;
+CREATE INDEX `fk_color_has_product_color_idx` ON `project`.`proWithColors` (`idColor` ASC) VISIBLE;
 
 CREATE UNIQUE INDEX `idProWithCol_UNIQUE` ON `project`.`proWithColors` (`idProWithCol` ASC) VISIBLE;
 
@@ -258,16 +258,16 @@ CREATE TABLE IF NOT EXISTS `project`.`account` (
   `accAddress` VARCHAR(300) NOT NULL,
   `idCart` INT NOT NULL,
   PRIMARY KEY (`idAccount`, `idCart`),
-  CONSTRAINT `fk_account_Cart1`
+  CONSTRAINT `fk_account_cart1`
     FOREIGN KEY (`idCart`)
-    REFERENCES `project`.`Cart` (`idCart`)
+    REFERENCES `project`.`cart` (`idCart`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `accUsername_UNIQUE` ON `project`.`account` (`accUsername` ASC) VISIBLE;
 
-CREATE INDEX `fk_Account_Cart1_idx` ON `project`.`account` (`idCart` ASC) VISIBLE;
+CREATE INDEX `fk_account_cart1_idx` ON `project`.`account` (`idCart` ASC) VISIBLE;
 
 CREATE UNIQUE INDEX `idAccount_UNIQUE` ON `project`.`account` (`idAccount` ASC) VISIBLE;
 
@@ -295,30 +295,30 @@ CREATE TABLE IF NOT EXISTS `project`.`cartDetails` (
   `proPerPiece` INT NOT NULL,
   `idColor` INT NOT NULL,
   PRIMARY KEY (`idCartDetail`, `idPro`, `idCart`, `idColor`),
-  CONSTRAINT `fk_CartDetail_Product1`
+  CONSTRAINT `fk_cartDetail_product1`
     FOREIGN KEY (`idPro`)
-    REFERENCES `project`.`Product` (`idPro`)
+    REFERENCES `project`.`product` (`idPro`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_CartDetail_Cart1`
+  CONSTRAINT `fk_cartDetail_cart1`
     FOREIGN KEY (`idCart`)
-    REFERENCES `project`.`Cart` (`idCart`)
+    REFERENCES `project`.`cart` (`idCart`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_cartDetails_Color1`
+  CONSTRAINT `fk_cartDetails_color1`
     FOREIGN KEY (`idColor`)
-    REFERENCES `project`.`Color` (`idColor`)
+    REFERENCES `project`.`color` (`idColor`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_CartDetail_Product_idx` ON `project`.`cartDetails` (`idPro` ASC) VISIBLE;
+CREATE INDEX `fk_cartDetail_product_idx` ON `project`.`cartDetails` (`idPro` ASC) VISIBLE;
 
-CREATE INDEX `fk_CartDetail_Cart_idx` ON `project`.`cartDetails` (`idCart` ASC) VISIBLE;
+CREATE INDEX `fk_cartDetail_cart_idx` ON `project`.`cartDetails` (`idCart` ASC) VISIBLE;
 
 CREATE UNIQUE INDEX `idCartDetail_UNIQUE` ON `project`.`cartDetails` (`idCartDetail` ASC) VISIBLE;
 
-CREATE INDEX `fk_cartDetails_Color1_idx` ON `project`.`cartDetails` (`idColor` ASC) VISIBLE;
+CREATE INDEX `fk_cartDetails_color1_idx` ON `project`.`cartDetails` (`idColor` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
@@ -331,14 +331,14 @@ CREATE TABLE IF NOT EXISTS `project`.`receipt` (
   `idAccount` INT NOT NULL,
   `datePurchase` DATETIME NULL,
   PRIMARY KEY (`idReceipt`, `idAccount`),
-  CONSTRAINT `fk_receipt_Account1`
+  CONSTRAINT `fk_receipt_account1`
     FOREIGN KEY (`idAccount`)
-    REFERENCES `project`.`Account` (`idAccount`)
+    REFERENCES `project`.`account` (`idAccount`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_receipt_Account1_idx` ON `project`.`receipt` (`idAccount` ASC) VISIBLE;
+CREATE INDEX `fk_receipt_account1_idx` ON `project`.`receipt` (`idAccount` ASC) VISIBLE;
 
 CREATE UNIQUE INDEX `idReceipt_UNIQUE` ON `project`.`receipt` (`idReceipt` ASC) VISIBLE;
 
@@ -357,23 +357,23 @@ CREATE TABLE IF NOT EXISTS `project`.`receiptDetails` (
   `proPerPiece` INT NOT NULL COMMENT 'เสื้อ A มีจำนวน 10 ชิ้น\nเสื้อ B มีจำนวน 10 ชิ้น\nproPerPiece(A) = 10\nproPerPiece(B) = 10',
   `idColor` INT NOT NULL,
   PRIMARY KEY (`idReceiptDetails`, `idReceipt`, `idColor`),
-  CONSTRAINT `fk_receiptDetails_Receipt1`
+  CONSTRAINT `fk_receiptDetails_receipt1`
     FOREIGN KEY (`idReceipt`)
-    REFERENCES `project`.`Receipt` (`idReceipt`)
+    REFERENCES `project`.`receipt` (`idReceipt`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_receiptDetails_Color1`
+  CONSTRAINT `fk_receiptDetails_color1`
     FOREIGN KEY (`idColor`)
-    REFERENCES `project`.`Color` (`idColor`)
+    REFERENCES `project`.`color` (`idColor`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_receiptDetails_Receipt1_idx` ON `project`.`receiptDetails` (`idReceipt` ASC) VISIBLE;
+CREATE INDEX `fk_receiptDetails_receipt1_idx` ON `project`.`receiptDetails` (`idReceipt` ASC) VISIBLE;
 
 CREATE UNIQUE INDEX `idReceiptDetails_UNIQUE` ON `project`.`receiptDetails` (`idReceiptDetails` ASC) VISIBLE;
 
-CREATE INDEX `fk_receiptDetails_Color1_idx` ON `project`.`receiptDetails` (`idColor` ASC) VISIBLE;
+CREATE INDEX `fk_receiptDetails_color1_idx` ON `project`.`receiptDetails` (`idColor` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
