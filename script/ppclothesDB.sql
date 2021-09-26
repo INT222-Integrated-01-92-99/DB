@@ -251,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `project`.`account` (
   `idAccount` INT NOT NULL AUTO_INCREMENT,
   `accUsername` VARCHAR(45) NOT NULL,
   `accPass` VARCHAR(45) NOT NULL,
-  `accRole` VARCHAR(45) NOT NULL,
+  `accRole` VARCHAR(45) NOT NULL CHECK (`accRole` IN ('Admin','Staff','Member')),
   `accFname` VARCHAR(45) NOT NULL,
   `accLname` VARCHAR(45) NOT NULL,
   `accPhone` VARCHAR(20) NOT NULL,
@@ -292,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `project`.`cartDetails` (
   `idCartDetail` INT NOT NULL AUTO_INCREMENT,
   `idPro` INT NOT NULL,
   `idCart` INT NOT NULL,
-  `proPerPiece` INT NOT NULL,
+  `proPerPiece` INT NOT NULL CHECK (`proPerPiece` >= 0),
   `idColor` INT NOT NULL,
   PRIMARY KEY (`idCartDetail`, `idPro`, `idCart`, `idColor`),
   CONSTRAINT `fk_cartDetail_product1`
@@ -353,8 +353,8 @@ CREATE TABLE IF NOT EXISTS `project`.`receiptDetails` (
   `idReceipt` INT NOT NULL,
   `brandName` VARCHAR(45) NOT NULL,
   `proName` VARCHAR(100) NOT NULL,
-  `proPrice` DECIMAL(10,2) NOT NULL,
-  `proPerPiece` INT NOT NULL COMMENT 'เสื้อ A มีจำนวน 10 ชิ้น\nเสื้อ B มีจำนวน 10 ชิ้น\nproPerPiece(A) = 10\nproPerPiece(B) = 10',
+  `proPrice` DECIMAL(10,2) NOT NULL CHECK (`proPrice` > 0),
+  `proPerPiece` INT NOT NULL CHECK (`proPerPiece` >= 0) COMMENT 'เสื้อ A มีจำนวน 10 ชิ้น\nเสื้อ B มีจำนวน 10 ชิ้น\nproPerPiece(A) = 10\nproPerPiece(B) = 10',
   `idColor` INT NOT NULL,
   PRIMARY KEY (`idReceiptDetails`, `idReceipt`, `idColor`),
   CONSTRAINT `fk_receiptDetails_receipt1`
