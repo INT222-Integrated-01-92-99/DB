@@ -104,8 +104,8 @@ CREATE TABLE IF NOT EXISTS `project`.`product` (
   `idPro` INT NOT NULL AUTO_INCREMENT,
   `proName` VARCHAR(100) NOT NULL,
   `proDescript` LONGTEXT NOT NULL,
-  `proPrice` DECIMAL(10,2) NOT NULL,
-  `proAmount` INT NOT NULL,
+  `proPrice` DECIMAL(10,2) NOT NULL CHECK (`proPrice` > 0),
+  `proAmount` INT NOT NULL CHECK (`proAmount` >= 0),
   `proMFD` DATE NOT NULL,
   `proPathImg` MEDIUMTEXT NOT NULL,
   `idBrand` INT NOT NULL,
@@ -114,9 +114,7 @@ CREATE TABLE IF NOT EXISTS `project`.`product` (
     FOREIGN KEY (`idBrand`)
     REFERENCES `project`.`brand` (`idBrand`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `proPrice` CHECK (`proPrice` > 0),
-  CONSTRAINT `proAmount` CHECK (`proAmount` >= 0))
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `idProduct_UNIQUE` ON `project`.`product` (`idPro` ASC) VISIBLE;
