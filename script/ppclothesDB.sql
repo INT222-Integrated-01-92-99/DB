@@ -115,6 +115,8 @@ CREATE TABLE IF NOT EXISTS `project`.`product` (
     REFERENCES `project`.`brand` (`idBrand`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+  CONSTRAINT `proPrice` CHECK (`proPrice` > 0)
+  CONSTRAINT `proAmount` CHECK (`proAmount` >= 0)
 ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `idProduct_UNIQUE` ON `project`.`product` (`idPro` ASC) VISIBLE;
