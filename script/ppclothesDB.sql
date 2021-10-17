@@ -293,6 +293,7 @@ CREATE TABLE IF NOT EXISTS `project`.`cartDetails` (
   `idPro` INT NOT NULL,
   `idCart` INT NOT NULL,
   `proPerPiece` INT NOT NULL CHECK (`proPerPiece` >= 0),
+  `totalPrice` INT NOT NULL CHECK (`totalPrice` >= 0),
   `idColor` INT NOT NULL,
   PRIMARY KEY (`idCartDetail`, `idPro`, `idCart`, `idColor`),
   CONSTRAINT `fk_cartDetail_product1`
