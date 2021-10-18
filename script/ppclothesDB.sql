@@ -222,6 +222,7 @@ DROP TABLE IF EXISTS `project`.`cart` ;
 
 CREATE TABLE IF NOT EXISTS `project`.`cart` (
   `idCart` INT NOT NULL AUTO_INCREMENT,
+  `totalPrice` INT NOT NULL CHECK (`totalPrice` >= 0),
   PRIMARY KEY (`idCart`))
 ENGINE = InnoDB;
 
@@ -235,10 +236,10 @@ LIMIT 0, 1000
 */
 USE `project`;
 
-INSERT INTO `cart` (`idCart`) VALUES (1);
-INSERT INTO `cart` (`idCart`) VALUES (2);
-INSERT INTO `cart` (`idCart`) VALUES (3);
-INSERT INTO `cart` (`idCart`) VALUES (4);
+INSERT INTO `cart` (`idCart`, `totalPrice`) VALUES (1, 0);
+INSERT INTO `cart` (`idCart`, `totalPrice`) VALUES (2, 0);
+INSERT INTO `cart` (`idCart`, `totalPrice`) VALUES (3, 0);
+INSERT INTO `cart` (`idCart`, `totalPrice`) VALUES (4, 0);
 
 COMMIT;
 
