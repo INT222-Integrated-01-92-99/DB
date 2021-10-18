@@ -332,6 +332,7 @@ CREATE TABLE IF NOT EXISTS `project`.`receipt` (
   `idReceipt` INT NOT NULL AUTO_INCREMENT,
   `idAccount` INT NOT NULL,
   `datePurchase` DATETIME NULL,
+  `totalPrice` INT NOT NULL CHECK (`totalPrice` >= 0),
   PRIMARY KEY (`idReceipt`, `idAccount`),
   CONSTRAINT `fk_receipt_account1`
     FOREIGN KEY (`idAccount`)
@@ -357,6 +358,7 @@ CREATE TABLE IF NOT EXISTS `project`.`receiptDetails` (
   `proName` VARCHAR(100) NOT NULL,
   `proPrice` DECIMAL(10,2) NOT NULL CHECK (`proPrice` > 0),
   `proPerPiece` INT NOT NULL CHECK (`proPerPiece` >= 0) COMMENT 'เสื้อ A มีจำนวน 10 ชิ้น\nเสื้อ B มีจำนวน 10 ชิ้น\nproPerPiece(A) = 10\nproPerPiece(B) = 10',
+  `totalPrice` INT NOT NULL CHECK (`totalPrice` >= 0),
   `idColor` INT NOT NULL,
   PRIMARY KEY (`idReceiptDetails`, `idReceipt`, `idColor`),
   CONSTRAINT `fk_receiptDetails_receipt1`
