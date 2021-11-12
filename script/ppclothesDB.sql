@@ -250,7 +250,7 @@ DROP TABLE IF EXISTS `project`.`role` ;
 
 CREATE TABLE IF NOT EXISTS `project`.`role` (
   `idRole` INT NOT NULL AUTO_INCREMENT,
-  `role` VARCHAR(45) NOT NULL CHECK (`role` IN ('admin','staff','member')),
+  `role` VARCHAR(45) NOT NULL CHECK (`role` IN ('ROLE_ADMIN','ROLE_STAFF','ROLE_MEMBER')),
   PRIMARY KEY (`idRole`))
 ENGINE = InnoDB;
 
@@ -264,9 +264,9 @@ LIMIT 0, 1000
 */
 USE `project`;
 
-INSERT INTO `role` (`idRole`, `role`) VALUES (1, 'admin');
-INSERT INTO `role` (`idRole`, `role`) VALUES (2, 'staff');
-INSERT INTO `role` (`idRole`, `role`) VALUES (3, 'member');
+INSERT INTO `role` (`idRole`, `role`) VALUES (1, 'ROLE_ADMIN');
+INSERT INTO `role` (`idRole`, `role`) VALUES (2, 'ROLE_STAFF');
+INSERT INTO `role` (`idRole`, `role`) VALUES (3, 'ROLE_MEMBER');
 
 COMMIT;
 -- -----------------------------------------------------
@@ -278,7 +278,6 @@ CREATE TABLE IF NOT EXISTS `project`.`account` (
   `idAccount` INT NOT NULL AUTO_INCREMENT,
   `accUsername` VARCHAR(45) NOT NULL,
   `accPass` VARCHAR(45) NOT NULL,
-  `accRole` VARCHAR(45) NOT NULL CHECK (`accRole` IN ('admin','staff','member')),
   `accFname` VARCHAR(45) NOT NULL,
   `accLname` VARCHAR(45) NOT NULL,
   `accPhone` VARCHAR(20) NOT NULL,
@@ -313,10 +312,10 @@ LIMIT 0, 1000
 -- Date: 2021-09-02 16:10
 */
 USE `project`;
-INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accRole`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`, `idRole`) VALUES (1,'yamjaii','jaiyen123','member','yamcha','fainting','0833333333','88 north kaio\'s planet 86868',1,3);
-INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accRole`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`, `idRole`) VALUES (2,'sunshinewink','moonsun','member','arthit','songsaeng','0822222222','99 land-ofthesun99/9 sawang 12345 ',2,3);
-INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accRole`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`, `idRole`) VALUES (3,'somdui','12345','admin','somdui','puipui','0811111111','112 inyourheart22/2 forever 12222',3,1);
-INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accRole`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`, `idRole`) VALUES (4,'kiritokun','asuna','admin','kirito','kirigaya','0812345689','36 swordland10 underworld 11111',4,1);
+INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`, `idRole`) VALUES (1,'yamjaii','jaiyen123','yamcha','fainting','0833333333','88 north kaio\'s planet 86868',1,3);
+INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`, `idRole`) VALUES (2,'sunshinewink','moonsun','arthit','songsaeng','0822222222','99 land-ofthesun99/9 sawang 12345 ',2,3);
+INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`, `idRole`) VALUES (3,'somdui','12345','somdui','puipui','0811111111','112 inyourheart22/2 forever 12222',3,1);
+INSERT INTO `account` (`idAccount`,`accUsername`,`accPass`,`accFname`,`accLname`,`accPhone`,`accAddress`,`idCart`, `idRole`) VALUES (4,'kiritokun','asuna','kirito','kirigaya','0812345689','36 swordland10 underworld 11111',4,1);
 COMMIT;
 -- -----------------------------------------------------
 -- Table `project`.`CartDetails`
