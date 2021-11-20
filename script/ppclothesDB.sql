@@ -277,7 +277,7 @@ DROP TABLE IF EXISTS `project`.`account` ;
 CREATE TABLE IF NOT EXISTS `project`.`account` (
   `idAccount` INT NOT NULL AUTO_INCREMENT,
   `accUsername` VARCHAR(45) NOT NULL,
-  `accPass` VARCHAR(45) NOT NULL,
+  `accPass` VARCHAR(60) NOT NULL,
   `accFname` VARCHAR(45) NOT NULL,
   `accLname` VARCHAR(45) NOT NULL,
   `accPhone` VARCHAR(20) NOT NULL,
