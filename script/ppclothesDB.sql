@@ -288,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `project`.`account` (
   CONSTRAINT `fk_account_cart1`
     FOREIGN KEY (`idCart`)
     REFERENCES `project`.`cart` (`idCart`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_account_role1`
     FOREIGN KEY (`idRole`)
