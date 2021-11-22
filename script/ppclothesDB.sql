@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `project`.`product` (
   CONSTRAINT `fk_product_brand`
     FOREIGN KEY (`idBrand`)
     REFERENCES `project`.`brand` (`idBrand`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -157,12 +157,12 @@ CREATE TABLE IF NOT EXISTS `project`.`proWithColors` (
   CONSTRAINT `fk_color_has_product_color`
     FOREIGN KEY (`idColor`)
     REFERENCES `project`.`color` (`idColor`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_color_has_product_product`
     FOREIGN KEY (`idPro`)
     REFERENCES `project`.`product` (`idPro`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -292,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `project`.`account` (
     CONSTRAINT `fk_account_role1`
     FOREIGN KEY (`idRole`)
     REFERENCES `project`.`role` (`idRole`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -337,17 +337,17 @@ CREATE TABLE IF NOT EXISTS `project`.`cartDetails` (
   CONSTRAINT `fk_cartDetail_product1`
     FOREIGN KEY (`idPro`)
     REFERENCES `project`.`product` (`idPro`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cartDetail_cart1`
     FOREIGN KEY (`idCart`)
     REFERENCES `project`.`cart` (`idCart`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cartDetails_color1`
     FOREIGN KEY (`idColor`)
     REFERENCES `project`.`color` (`idColor`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -374,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `project`.`receipt` (
   CONSTRAINT `fk_receipt_account1`
     FOREIGN KEY (`idAccount`)
     REFERENCES `project`.`account` (`idAccount`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -401,12 +401,12 @@ CREATE TABLE IF NOT EXISTS `project`.`receiptDetails` (
   CONSTRAINT `fk_receiptDetails_receipt1`
     FOREIGN KEY (`idReceipt`)
     REFERENCES `project`.`receipt` (`idReceipt`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_receiptDetails_color1`
     FOREIGN KEY (`idColor`)
     REFERENCES `project`.`color` (`idColor`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
